@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stray_resuce_bih/core/theme/app_theme.dart';
 import 'package:stray_resuce_bih/core/services/firebase_service.dart';
 import 'package:stray_resuce_bih/features/auth/screens/welcome_screen.dart';
-import 'package:stray_resuce_bih/features/report/my_reports_screen.dart';
+import 'package:stray_resuce_bih/features/report/rescue_reports_screen.dart';
 import 'package:stray_resuce_bih/features/profile/profile_screen.dart';
 import 'package:stray_resuce_bih/features/notifications/notifications_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,8 +24,8 @@ class _VolunteerDashboardState extends ConsumerState<VolunteerDashboard> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = const [
-    _VolunteerReportsFeed(), // Real feed
-    MyReportsScreen(),
+    _VolunteerReportsFeed(), // Feed locations (feeding stations)
+    RescueReportsScreen(),   // All rescue reports from citizens
     NotificationsScreen(),
     ProfileScreen(),
   ];

@@ -44,7 +44,7 @@ class GooglePlacesService {
             .toList();
 
         // Calculate distance from user for each vet
-        final locationService = LocationService();
+        final locationService = LocationService(); 
         for (var vet in vets) {
           vet.distanceFromUser = locationService.calculateDistance(
             latitude,
