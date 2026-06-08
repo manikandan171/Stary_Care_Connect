@@ -10,6 +10,7 @@ import 'package:stray_resuce_bih/features/dashboards/volunteer_dashboard.dart';
 import 'package:stray_resuce_bih/features/dashboards/ngo_dashboard.dart';
 import 'package:stray_resuce_bih/features/dashboards/vet_dashboard.dart';
 import 'package:stray_resuce_bih/features/auth/screens/forgot_password_screen.dart';
+import 'package:stray_resuce_bih/core/utils/validators.dart';
 
 /// Login Screen - Existing users sign in
 class LoginScreen extends ConsumerStatefulWidget {
@@ -231,10 +232,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               child: ElevatedButton(
                 onPressed: () async {
                   final email = emailCtrl.text.trim();
-                  // Validate email format
-                  if (email.isEmpty || !email.contains('@')) {
+                  // Validate email format using regex
+                  final emailError = Validators.validateEmail(email);
+                  if (emailError != null) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Please enter a valid email')),
+                      SnackBar(content: Text(emailError)),
                     );
                     return;
                   }
@@ -376,11 +378,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         fillColor: Colors.white,
                       ),
                       keyboardType: TextInputType.emailAddress,
-                      validator: (v) {
-                        if (v == null || v.isEmpty) return 'Required';
-                        if (!v.contains('@')) return 'Invalid email';
-                        return null;
-                      },
+                      validator: Validators.validateEmail,
                     ),
                     
                     const SizedBox(height: 16),

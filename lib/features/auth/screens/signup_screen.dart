@@ -13,6 +13,7 @@ import 'package:stray_resuce_bih/features/dashboards/citizen_dashboard.dart';
 import 'package:stray_resuce_bih/features/dashboards/volunteer_dashboard.dart';
 import 'package:stray_resuce_bih/features/dashboards/ngo_dashboard.dart';
 import 'package:stray_resuce_bih/features/dashboards/vet_dashboard.dart';
+import 'package:stray_resuce_bih/core/utils/validators.dart';
 
 /// Signup Screen with role-specific fields
 class SignupScreen extends ConsumerStatefulWidget {
@@ -101,8 +102,9 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
   Future<void> _verifyEmail() async {
     final email = _emailController.text.trim();
-    if (email.isEmpty || !email.contains('@')) {
-      _showSnackBar('Please enter a valid email first', isError: true);
+    final emailError = Validators.validateEmail(email);
+    if (emailError != null) {
+      _showSnackBar(emailError, isError: true);
       return;
     }
 
@@ -373,12 +375,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
               label: 'Mobile Number',
               icon: Icons.phone,
               keyboardType: TextInputType.phone,
-              validator: (v) {
-                if (v == null || v.isEmpty) return 'Required';
-                if (v.length != 10) return 'Must be exactly 10 digits';
-                if (!RegExp(r'^\d+$').hasMatch(v)) return 'Only numbers allowed';
-                return null;
-              },
+              validator: Validators.validatePhone,
               onChanged: _validatePhone,
               errorText: _phoneError,
               inputFormatters: [
@@ -394,7 +391,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
               label: 'Email',
               icon: Icons.email,
               keyboardType: TextInputType.emailAddress,
-              validator: (v) => !v!.contains('@') ? 'Invalid email' : null,
+              validator: Validators.validateEmail,
               suffix: _isEmailVerified
                   ? const Icon(Icons.check_circle, color: Colors.green)
                   : TextButton(
