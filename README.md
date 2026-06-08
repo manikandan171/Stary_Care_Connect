@@ -33,7 +33,8 @@ To run this project locally:
 2.  Clone the repository.
 3.  Run `flutter pub get` to install dependencies.
 4.  Configure Firebase for your environment (add `google-services.json` / `GoogleService-Info.plist` and `firebase_options.dart`).
-5.  Run `flutter run` on your preferred device or emulator.
+5.  Configure the OTP service in `lib/core/services/otp_service.dart` by providing your own Gmail SMTP credentials (use an App Password).
+6.  Run `flutter run` on your preferred device or emulator.
 
 ## 🔒 Security & Architecture
 

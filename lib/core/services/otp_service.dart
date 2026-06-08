@@ -22,8 +22,8 @@ class OtpService {
   // IMPORTANT: Replace these with your actual Gmail credentials
   // For security, use an App Password, not your actual Gmail password
   // Generate App Password: https://myaccount.google.com/apppasswords
-  static const String _gmailUsername = 'mani123mani123saranya@gmail.com'; 
-  static const String _gmailPassword = 'nnubyjojjddcsqdz';
+  static const String _gmailUsername = 'YOUR_EMAIL@gmail.com'; 
+  static const String _gmailPassword = 'YOUR_APP_PASSWORD';
   static const String _senderName = 'StrayCare Connect';
 
   /// Send OTP to the specified email via Gmail SMTP
